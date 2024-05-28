@@ -1,17 +1,16 @@
-import express from 'express';
-import type { Request, Response } from 'express';
-import cors from 'cors';
-export const app = express();
+import express, { Request, Response } from 'express';
 
-const corsOptions = {
-  origin: '*',
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
+const app = express();
+const port = process.env.PORT || 8080;
 
-app.use(cors(corsOptions));
-app.use(express.json());
+app.get('/', (_req: Request, res: Response) => {
+  return res.send('Express Typescript on Vercel');
+});
 
-app.get('/', (req: Request, res: Response) => res.send('Express on Vercel'));
+app.get('/ping', (_req: Request, res: Response) => {
+  return res.send('pong 🏓');
+});
 
-app.listen(3001, () => console.log(`Server running on port ${3001}`));
+app.listen(port, () => {
+  return console.log(`Server is listening on ${port}`);
+});
